@@ -197,7 +197,8 @@ fn main() {
     println!("cargo:FOUND=1");
     println!("cargo:COMPILE_FLAGS={}", flags.join(";"));
 
-    let macos_lib_search = if cargo_target_os == "macos" { "=framework" } else { "" };
+    // let macos_lib_search = if cargo_target_os == "macos" { "=framework" } else { "" };
+    let macos_lib_search =  "" ;
     let vers_suffix =
         if cargo_target_os == "macos" { "".to_string() } else { qt_version.major.to_string() };
 
@@ -226,13 +227,13 @@ fn main() {
             suffix = windows_dbg_suffix
         )
     };
-    link_lib("Core");
-    link_lib("Gui");
-    link_lib("Widgets");
+    link_lib("5Core");
+    link_lib("5Gui");
+    link_lib("5Widgets");
     #[cfg(feature = "qtquick")]
-    link_lib("Quick");
+    link_lib("5Quick");
     #[cfg(feature = "qtquick")]
-    link_lib("Qml");
+    link_lib("5Qml");
     #[cfg(feature = "qtwebengine")]
     if (cargo_target_os == "windows") && (cargo_target_env != "msvc") {
         println!("cargo:warning=On Windows, WebEngine module is only available under MSVC 2017 or MSVC2019.");
@@ -248,14 +249,14 @@ fn main() {
         link_lib("WebEngine");
     }
     #[cfg(feature = "qtquickcontrols2")]
-    link_lib("QuickControls2");
+    link_lib("5QuickControls2");
     #[cfg(feature = "qtmultimedia")]
-    link_lib("Multimedia");
+    link_lib("5Multimedia");
     #[cfg(feature = "qtmultimediawidgets")]
-    link_lib("MultimediaWidgets");
+    link_lib("5MultimediaWidgets");
     #[cfg(feature = "qtsql")]
-    link_lib("Sql");
+    link_lib("5Sql");
     #[cfg(feature = "qttest")]
-    link_lib("Test");
+    link_lib("5Test");
     println!("cargo:rerun-if-changed=src");
 }
